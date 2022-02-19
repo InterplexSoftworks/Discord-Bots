@@ -1,0 +1,30 @@
+const {Client, MessageEmbed, Message} = require("discord.js")
+const client = new Client()
+const prefix = "Your Prefix"
+
+client.on("ready", () => {
+    console.log("logged in")
+    client.user.setActivity(`Status!`)
+})
+
+client.on("message", async message=> {
+    if(message.author.bot) return;
+    if(!message.content.startsWith(prefix)) return;
+    const args = message.content.slice(1).trim().split(/ +/g); 
+    const command = args.shift().toLowerCase();
+
+    if(command == "cmd"){
+        message.channel.send(`This command works.`)
+}
+
+if(command == "embedcmd"){
+    const embed = new MessageEmbed()
+        .setTitle(`Title`)
+        .setDescription("Desc")
+        .setFooter("Footer")
+        .setColor("CDC0EA");
+        message.channel.send(embed)
+}
+})
+
+client.login('Bot token')
